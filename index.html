@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Befinner to Advanced — Calisthenics Plan</title>
+<title>Zero to Superhuman — Calisthenics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -17,23 +17,17 @@
   --text: #EDECE6;
   --muted: #6B6A66;
   --muted2: #9998A0;
-
-  /* Phase accent — updated via JS */
   --accent: #3D8EDE;
   --accent-dim: rgba(61,142,222,0.12);
   --accent-mid: rgba(61,142,222,0.25);
-
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
   --radius: 12px;
   --radius-sm: 8px;
-  --transition: 0.22s cubic-bezier(0.4,0,0.2,1);
+  --t: 0.22s cubic-bezier(0.4,0,0.2,1);
 }
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
-
 body {
   background: var(--bg);
   color: var(--text);
@@ -44,554 +38,486 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ─── NAV ─── */
+/* ── NAV ── */
 nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(12,12,14,0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(12,12,14,0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
   padding: 0 20px;
-  display: flex;
-  align-items: center;
+  display: flex; align-items: center;
   justify-content: space-between;
-  height: 60px;
-  gap: 12px;
+  height: 58px; gap: 16px;
 }
-
 .nav-logo {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--text);
-  letter-spacing: -0.02em;
-  white-space: nowrap;
+  font-weight: 700; font-size: 14px;
+  color: var(--text); letter-spacing: -0.02em;
+  white-space: nowrap; flex-shrink: 0;
 }
-.nav-logo span { color: var(--accent); transition: color var(--transition); }
+.nav-logo em { color: var(--accent); font-style: normal; transition: color var(--t); }
 
 .phase-tabs {
-  display: flex;
-  gap: 4px;
+  display: flex; gap: 3px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 4px;
+  border-radius: 10px; padding: 4px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; flex-shrink: 1;
 }
-
+.phase-tabs::-webkit-scrollbar { display: none; }
 .phase-tab {
   font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 500;
-  padding: 6px 14px;
-  border-radius: 7px;
-  border: none;
-  background: transparent;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all var(--transition);
-  white-space: nowrap;
+  font-size: 11px; font-weight: 500;
+  padding: 5px 12px; border-radius: 7px;
+  border: none; background: transparent;
+  color: var(--muted); cursor: pointer;
+  transition: all var(--t); white-space: nowrap;
+  flex-shrink: 0;
 }
 .phase-tab:hover { color: var(--text); background: var(--card); }
-.phase-tab.active {
-  background: var(--accent);
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
+.phase-tab.active { background: var(--accent); color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.35); }
 
-/* ─── HERO ─── */
-.hero {
-  padding: 48px 20px 36px;
-  max-width: 860px;
-  margin: 0 auto;
-}
-
+/* ── HERO ── */
+.hero { padding: 48px 20px 28px; max-width: 860px; margin: 0 auto; }
 .phase-eyebrow {
   font-family: var(--font-display);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 10px;
-  transition: color var(--transition);
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 10px;
+  transition: color var(--t);
 }
-
 .hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(24px, 5vw, 38px);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: var(--text);
-  margin-bottom: 14px;
+  font-size: clamp(22px, 4.5vw, 36px);
+  font-weight: 700; letter-spacing: -0.03em;
+  line-height: 1.1; margin-bottom: 14px;
 }
-
-.hero-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 24px;
-}
-
+.hero-meta { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 24px; }
 .meta-pill {
-  font-size: 12px;
-  font-weight: 500;
-  padding: 4px 12px;
-  border-radius: 20px;
-  background: var(--accent-dim);
-  color: var(--accent);
+  font-size: 11px; font-weight: 500;
+  padding: 4px 11px; border-radius: 20px;
+  background: var(--accent-dim); color: var(--accent);
   border: 1px solid var(--accent-mid);
-  transition: all var(--transition);
+  transition: all var(--t);
 }
 
-.pyramid-bar {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 8px;
-}
+/* Pyramid */
+.pyramid-wrap { margin-bottom: 32px; }
+.pyramid-bar { display: flex; gap: 5px; margin-bottom: 6px; }
 .pyramid-seg {
-  height: 4px;
-  flex: 1;
-  border-radius: 4px;
-  background: var(--border-strong);
-  transition: background var(--transition);
+  flex: 1; border-radius: 4px;
+  transition: background var(--t), opacity var(--t);
 }
-.pyramid-seg.lit { background: var(--accent); }
+.pyramid-seg.lit { opacity: 1; }
+.pyramid-seg.dim { background: var(--border-strong) !important; opacity: 1; }
+.pyramid-label { font-size: 11px; color: var(--muted); }
+.pyramid-label span { color: var(--accent); transition: color var(--t); }
 
-.pyramid-label {
-  font-size: 11px;
-  color: var(--muted);
-  margin-bottom: 32px;
-}
-.pyramid-label span { color: var(--accent); transition: color var(--transition); }
-
-/* ─── NOTES BOX ─── */
+/* ── UPDATE NOTE ── */
 .update-note {
-  background: rgba(255,220,80,0.06);
-  border: 1px solid rgba(255,220,80,0.15);
+  background: rgba(255,220,80,0.05);
+  border: 1px solid rgba(255,220,80,0.14);
   border-radius: var(--radius-sm);
-  padding: 12px 16px;
-  font-size: 12px;
-  color: #C8A84B;
-  line-height: 1.7;
-  margin: 0 auto 28px;
-  max-width: 860px;
+  padding: 11px 16px; font-size: 12px;
+  color: #B8943B; line-height: 1.7;
+  margin: 0 auto 24px; max-width: 860px;
   padding-left: 20px;
 }
-.update-note strong { color: #E8C660; display: block; margin-bottom: 2px; }
+.update-note strong { color: #D4AA48; display: block; margin-bottom: 2px; }
 
-/* ─── DAYS GRID ─── */
+/* ── DAYS ── */
 .days-container {
-  max-width: 860px;
-  margin: 0 auto;
+  max-width: 860px; margin: 0 auto;
   padding: 0 20px 60px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  display: flex; flex-direction: column; gap: 8px;
 }
 
-/* ─── DAY CARD ─── */
+/* ── DAY CARD ── */
 .day-card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: border-color var(--transition), box-shadow var(--transition);
+  border-radius: var(--radius); overflow: hidden;
+  transition: border-color var(--t), box-shadow var(--t);
 }
 .day-card:hover { border-color: var(--border-strong); }
 .day-card.open { border-color: var(--accent-mid); box-shadow: 0 0 0 1px var(--accent-mid); }
 
 .day-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 18px;
-  cursor: pointer;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
+  display: flex; align-items: center; gap: 12px;
+  padding: 15px 18px; cursor: pointer;
+  user-select: none; -webkit-tap-highlight-color: transparent;
 }
 .day-header:hover { background: var(--card-hover); }
 
 .day-dot {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--accent-dim);
-  border: 1px solid var(--accent-mid);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--accent);
-  flex-shrink: 0;
-  transition: all var(--transition);
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--accent-dim); border: 1px solid var(--accent-mid);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 10px; font-weight: 700;
+  color: var(--accent); flex-shrink: 0;
+  transition: all var(--t); letter-spacing: -0.02em;
 }
 .day-card.open .day-dot { background: var(--accent); color: #fff; border-color: var(--accent); }
 
 .day-info { flex: 1; min-width: 0; }
-.day-name {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--text);
-  letter-spacing: -0.01em;
-}
-.day-sub {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 1px;
-}
+.day-name { font-family: var(--font-display); font-weight: 600; font-size: 14px; letter-spacing: -0.01em; }
+.day-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
 
-.day-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-}
-
+.day-right { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
 .focus-tag {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 3px 9px;
-  border-radius: 20px;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 20px;
 }
-.tag-pull { background: rgba(61,142,222,0.15); color: #5AAEF5; }
-.tag-push { background: rgba(77,187,122,0.15); color: #5DD68A; }
-.tag-legs { background: rgba(230,148,60,0.15); color: #E8A860; }
-.tag-cardio { background: rgba(52,180,160,0.15); color: #4ECDB8; }
-.tag-circuit { background: rgba(220,90,130,0.15); color: #E87AA0; }
-.tag-skill { background: rgba(139,111,232,0.15); color: #A990F5; }
-.tag-rest { background: rgba(150,150,150,0.12); color: #9090A0; }
-.tag-hiit { background: rgba(220,70,70,0.15); color: #E87070; }
+.tag-pull    { background: rgba(61,142,222,0.15);  color: #5AAEF5; }
+.tag-push    { background: rgba(77,187,122,0.15);  color: #5DD68A; }
+.tag-legs    { background: rgba(230,148,60,0.15);  color: #E8A860; }
+.tag-cardio  { background: rgba(52,180,160,0.15);  color: #4ECDB8; }
+.tag-circuit { background: rgba(220,90,130,0.15);  color: #E87AA0; }
+.tag-skill   { background: rgba(139,111,232,0.15); color: #A990F5; }
+.tag-rest    { background: rgba(150,150,150,0.12); color: #9090A0; }
+.tag-hiit    { background: rgba(220,70,70,0.15);   color: #E87070; }
+.tag-power   { background: rgba(201,162,39,0.15);  color: #D4AA48; }
+.tag-elite   { background: rgba(220,70,130,0.15);  color: #E870A8; }
 
 .chevron {
-  width: 18px;
-  height: 18px;
-  color: var(--muted);
-  transition: transform var(--transition), color var(--transition);
-  flex-shrink: 0;
+  width: 16px; height: 16px; color: var(--muted);
+  transition: transform var(--t), color var(--t); flex-shrink: 0;
 }
 .day-card.open .chevron { transform: rotate(180deg); color: var(--accent); }
 
-/* ─── CARD BODY (accordion) ─── */
-.day-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1);
-}
-.day-card.open .day-body { max-height: 1000px; }
+/* ── ACCORDION ── */
+.day-body { max-height: 0; overflow: hidden; transition: max-height 0.38s cubic-bezier(0.4,0,0.2,1); }
+.day-card.open .day-body { max-height: 1200px; }
 
 .day-sections {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 0;
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
   border-top: 1px solid var(--border);
 }
+@media (max-width: 580px) { .day-sections { grid-template-columns: 1fr; } }
 
-@media (max-width: 600px) {
-  .day-sections { grid-template-columns: 1fr; }
-}
-
-.day-section {
-  padding: 16px 18px;
-  border-right: 1px solid var(--border);
-}
+.day-section { padding: 15px 18px; border-right: 1px solid var(--border); }
 .day-section:last-child { border-right: none; }
-
-@media (max-width: 600px) {
+@media (max-width: 580px) {
   .day-section { border-right: none; border-bottom: 1px solid var(--border); }
   .day-section:last-child { border-bottom: none; }
 }
 
 .section-label {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 10px;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 9px;
 }
-.label-warmup { color: #E8A860; }
-.label-workout { color: var(--accent); transition: color var(--transition); }
+.label-warmup  { color: #E8A860; }
+.label-workout { color: var(--accent); transition: color var(--t); }
 .label-stretch { color: #4ECDB8; }
 
-.section-items {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
+.section-items { list-style: none; display: flex; flex-direction: column; gap: 5px; }
 .section-items li {
-  font-size: 12px;
-  color: var(--muted2);
-  line-height: 1.5;
-  padding-left: 12px;
-  position: relative;
+  font-size: 12px; color: var(--muted2);
+  line-height: 1.5; padding-left: 12px; position: relative;
 }
-.section-items li::before {
-  content: '·';
-  position: absolute;
-  left: 2px;
-  color: var(--muted);
-}
+.section-items li::before { content: '·'; position: absolute; left: 2px; color: var(--muted); }
 .section-items li.new-item { color: var(--text); }
-.section-items li.new-item::after {
-  content: ' ★';
-  color: #E8C660;
-  font-size: 10px;
-}
-.section-items li.sub-header {
-  color: var(--muted);
-  font-size: 11px;
-  font-style: italic;
-  padding-left: 0;
-}
-.section-items li.sub-header::before { content: ''; }
+.section-items li.new-item::after { content: ' ★'; color: #D4AA48; font-size: 10px; }
+.section-items li.sub-item { color: var(--muted); font-size: 11px; font-style: italic; padding-left: 0; }
+.section-items li.sub-item::before { content: ''; }
 
-/* ─── PHASE PANELS ─── */
+/* ── PHASE PANELS ── */
 .phase-panel { display: none; }
-.phase-panel.active { display: block; }
+.phase-panel.active { display: block; animation: fadeUp 0.28s cubic-bezier(0.4,0,0.2,1) both; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 
-/* ─── FOOTER ─── */
+/* ── FOOTER ── */
 footer {
   border-top: 1px solid var(--border);
-  padding: 24px 20px;
-  max-width: 860px;
-  margin: 0 auto;
-  font-size: 11px;
-  color: var(--muted);
-  line-height: 1.8;
+  padding: 24px 20px; max-width: 860px; margin: 0 auto;
+  font-size: 11px; color: var(--muted); line-height: 1.9;
 }
 footer strong { color: var(--muted2); }
 
-/* ─── TRANSITIONS ON PHASE SWITCH ─── */
-.phase-panel {
-  animation: fadeUp 0.3s cubic-bezier(0.4,0,0.2,1) both;
-}
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ─── SCROLLBAR ─── */
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-logo">Beginner <span>·</span> Calisthenics</div>
-  <div class="phase-tabs">
-    <button class="phase-tab active" onclick="switchPhase(1)">Phase 1</button>
-    <button class="phase-tab" onclick="switchPhase(2)">Phase 2</button>
-    <button class="phase-tab" onclick="switchPhase(3)">Phase 3</button>
-  </div>
+  <div class="nav-logo">Zero to <em>Superhuman</em></div>
+  <div class="phase-tabs" id="tabs"></div>
 </nav>
 
-<!-- PANELS rendered by JS -->
 <div id="app"></div>
 
-<!-- FOOTER -->
 <footer>
-  <strong>Equipment:</strong> Pull-up bar · Gymnastic rings · Resistance bands (light → medium → heavy) · Mat · Parallettes from Phase 2 · Weight vest from Phase 3<br>
-  <strong>★ Updated items</strong> incorporate lower-leg training (jump rope warm-up, wall sit calf raises, dragon squats) added after Phase 1 review.<br>
-  <strong>Pyramid levels:</strong> Phase 1 exits Level 1 → Phase 2 exits Level 2 → Phase 3 enters Level 3–4
+  <strong>★ Updated items</strong> reflect lower-leg additions (jump rope warm-up, wall sit calf raises, dragon squats) and phase-specific progressions.<br>
+  <strong>Pyramid levels</strong> map to the 6-level calisthenics framework: Beginner → Novice → Intermediate → Advanced → Expert → Elite.<br>
+  <strong>Equipment progression:</strong> Bands + bar + rings (Lvl 1) → Parallettes added (Lvl 2-3) → Weight vest + chalk (Lvl 4+) → Gymnastics rings advanced (Lvl 5-6)
 </footer>
 
 <script>
-const PHASES = {
-  1: {
-    name: "Phase 1",
-    title: "Beginner Foundation",
-    dates: "1 Jul – 11 Aug 2026",
-    weeks: "6 weeks",
+const PHASES = [
+  {
+    id: 1, tab: "Beginner",
+    name: "Level 1 — Beginner",
+    title: "Foundation",
+    desc: "Build basic pulling, pushing, and movement patterns from scratch. Master form before volume.",
+    dates: "Weeks 1–6", weeks: "6 weeks",
     pyramidLevel: 1,
-    pyramidLabel: "Pyramid Level 1 → 2",
-    accent: "#3D8EDE",
-    accentDim: "rgba(61,142,222,0.12)",
-    accentMid: "rgba(61,142,222,0.25)",
-    note: "Wall sit + calf raises merged into combined wall sit calf raises (★). Jump rope added to Wednesday warm-up (★). No other changes from original plan.",
+    accent: "#3D8EDE", accentDim: "rgba(61,142,222,0.12)", accentMid: "rgba(61,142,222,0.25)",
+    note: "Wednesday: wall sit + calf raises merged into wall sit calf raises (★). Jump rope added to leg-day warm-up (★). These replace, not add to, existing exercises.",
     days: [
-      {
-        abbr:"Mo", day:"Monday", sub:"Pull + Core", tag:"Pull", tagClass:"pull",
+      { abbr:"Mo", day:"Monday", sub:"Pull + Core", tag:"Pull", tagClass:"pull",
         warmup:["Arm circles","Scapular pull-ups 2×8","Cat-cow ×10","Dead hang 20s"],
         workout:["Band-assisted pull-ups 3×5–8","Ring rows 3×8–10","Hanging knee raises 3×8","Side plank 2×20s/side"],
-        stretch:["Passive hang 2×30s","Lat stretch 30s/side","Child's pose 60s"]
-      },
-      {
-        abbr:"Tu", day:"Tuesday", sub:"Push", tag:"Push", tagClass:"push",
+        stretch:["Passive hang 2×30s","Lat stretch 30s/side","Child's pose 60s"] },
+      { abbr:"Tu", day:"Tuesday", sub:"Push", tag:"Push", tagClass:"push",
         warmup:["Arm swings","Incline push-ups ×8","Wrist circles","Band pull-aparts ×10"],
-        workout:["Push-ups (incline if needed) 3×6–10","Ring support hold 3×20–30s","Band shoulder press 3×10","Plank 2×30–40s"],
-        stretch:["Chest stretch 30s/side","Triceps stretch 30s","Shoulder stretch 30s"]
-      },
-      {
-        abbr:"We", day:"Wednesday", sub:"Legs", tag:"Legs", tagClass:"legs",
+        workout:["Incline push-ups 3×6–10","Ring support hold 3×20–30s","Band shoulder press 3×10","Plank 2×30–40s"],
+        stretch:["Chest stretch 30s/side","Triceps stretch 30s","Shoulder stretch 30s"] },
+      { abbr:"We", day:"Wednesday", sub:"Legs", tag:"Legs", tagClass:"legs",
         warmup:["[new]Jump rope 2–3 min","Leg swings","BW squats ×10","Ankle rocks"],
         workout:["Tempo squats 3×10","Band RDL 3×10","Glute bridges 3×12","[new]Wall sit calf raises 3×15–20 slow","Single-leg calf raises 2×12"],
-        stretch:["Quad stretch 30s","Hamstring stretch 45s","Hip flexor stretch 30s","Calf stretch 30s"]
-      },
-      {
-        abbr:"Th", day:"Thursday", sub:"Zone 2 Cardio", tag:"Cardio", tagClass:"cardio",
+        stretch:["Quad stretch 30s","Hamstring stretch 45s","Hip flexor stretch 30s","Calf stretch 30s"] },
+      { abbr:"Th", day:"Thursday", sub:"Zone 2 Cardio", tag:"Cardio", tagClass:"cardio",
         warmup:["—"],
         workout:["25–30 min brisk walk at conversational pace","Target HR 120–140 bpm"],
-        stretch:["Cat-cow 60s","Deep squat hold 45s","Thoracic rotation 30s/side","Light hang 20s"]
-      },
-      {
-        abbr:"Fr", day:"Friday", sub:"Full Body Circuit", tag:"Circuit", tagClass:"circuit",
+        stretch:["Cat-cow 60s","Deep squat hold 45s","Thoracic rotation 30s/side","Light hang 20s"] },
+      { abbr:"Fr", day:"Friday", sub:"Full Body Circuit", tag:"Circuit", tagClass:"circuit",
         warmup:["Jumping jacks","Squats ×10","Push-ups ×5","Arm circles"],
         workout:["[sub]2 rounds:","Band pull-ups ×5","BW squats ×15","Push-ups ×10","Plank 30s","Band rows ×10","Rest 90s between rounds"],
-        stretch:["Forward fold 45s","Cobra stretch 30s","Child's pose 45s","Figure-4 stretch 45s"]
-      },
-      {
-        abbr:"Sa", day:"Saturday", sub:"Skill Practice", tag:"Skill", tagClass:"skill",
+        stretch:["Forward fold 45s","Cobra 30s","Child's pose 45s","Figure-4 45s"] },
+      { abbr:"Sa", day:"Saturday", sub:"Skill Practice", tag:"Skill", tagClass:"skill",
         warmup:["Wrist prep","Shoulder rolls","Deep squat shifts"],
         workout:["Wall handstand hold 3×10–15s","Ring support hold 2×15–20s","Scapular pull-ups 2×8","Band pull-aparts 2×12"],
-        stretch:["Shoulder opener 45s","Deep squat hold 45s","Ankle stretch 30s"]
-      },
-      {
-        abbr:"Su", day:"Sunday", sub:"Full Rest", tag:"Rest", tagClass:"rest",
+        stretch:["Shoulder opener 45s","Deep squat hold 45s","Ankle stretch 30s"] },
+      { abbr:"Su", day:"Sunday", sub:"Full Rest", tag:"Rest", tagClass:"rest",
         warmup:["—"],
-        workout:["Full rest. Light walking optional.","No structured workout.","This is where adaptation happens."],
-        stretch:["Optional light stretching only"]
-      }
+        workout:["Full rest. Light walking optional.","No structured workout.","Adaptation happens on rest days."],
+        stretch:["Optional light stretching only"] }
     ]
   },
-  2: {
-    name: "Phase 2",
-    title: "Intermediate — Calisthenics + VO2 Max",
-    dates: "12 Aug – 6 Oct 2026",
-    weeks: "8 weeks",
+  {
+    id: 2, tab: "Novice",
+    name: "Level 2 — Novice",
+    title: "Intermediate + VO2 Max",
+    desc: "Graduate to unassisted pulling, ring work, and introduce HIIT to build cardiovascular capacity.",
+    dates: "Weeks 7–14", weeks: "8 weeks",
     pyramidLevel: 2,
-    pyramidLabel: "Pyramid Level 2 → 3",
-    accent: "#4DBB7A",
-    accentDim: "rgba(77,187,122,0.12)",
-    accentMid: "rgba(77,187,122,0.25)",
-    note: "Jump rope added to Wednesday warm-up (★). Dragon squats introduced weeks 5–6 replacing one Cossack set (★). Thursday HIIT unchanged — jump rope already central there.",
+    accent: "#4DBB7A", accentDim: "rgba(77,187,122,0.12)", accentMid: "rgba(77,187,122,0.25)",
+    note: "Jump rope added to Wednesday warm-up (★). Dragon squats introduced weeks 5–6 of this phase (★). Thursday HIIT is new — rotate options weekly.",
     days: [
-      {
-        abbr:"Mo", day:"Monday", sub:"Pull + Core", tag:"Pull", tagClass:"pull",
+      { abbr:"Mo", day:"Monday", sub:"Pull + Core", tag:"Pull", tagClass:"pull",
         warmup:["Arm circles","Scapular pull-ups 2×8","Band pull-aparts ×12","Dead hang 30s"],
         workout:["Unassisted pull-ups 4×4–6","Ring rows (horizontal) 3×8–10","Chin-ups 3×4–6","Hanging leg raises 3×8","Hollow body hold 3×20–30s"],
-        stretch:["Passive hang 2×45s","Lat stretch 45s/side","Thoracic extension 60s"]
-      },
-      {
-        abbr:"Tu", day:"Tuesday", sub:"Push (Rings)", tag:"Push", tagClass:"push",
+        stretch:["Passive hang 2×45s","Lat stretch 45s/side","Thoracic extension 60s"] },
+      { abbr:"Tu", day:"Tuesday", sub:"Push (Rings)", tag:"Push", tagClass:"push",
         warmup:["Arm swings","Wrist circles","Band pull-aparts ×15","Pike push-ups ×8","Ring support hold 20s"],
         workout:["Ring push-ups 3×8–10","Ring dips 3×5–8","Pike push-ups 3×8–10","Band face pulls 3×12","Plank-to-push-up 2×8"],
-        stretch:["Chest opener 45s/side","Wrist stretch 60s","Puppy pose 60s"]
-      },
-      {
-        abbr:"We", day:"Wednesday", sub:"Legs + Hinge", tag:"Legs", tagClass:"legs",
+        stretch:["Chest opener 45s/side","Wrist stretch 60s","Puppy pose 60s"] },
+      { abbr:"We", day:"Wednesday", sub:"Legs + Hinge", tag:"Legs", tagClass:"legs",
         warmup:["[new]Jump rope 3 min","Leg swings","BW squats ×15","Hip circles","Ankle mobility"],
-        workout:["Bulgarian split squats 4×6–8/leg","Single-leg RDL 3×8/leg","Nordic curl negatives 3×4–5","Cossack squats 3×6/side","[new]Wall sit calf raises 3×15","[new]Weeks 5–6 add: Dragon squats 3×5/leg (with support)"],
-        stretch:["Quad stretch 45s","Pigeon pose 60s","Hamstring stretch 60s","Hip flexor stretch 45s","Calf stretch 30s"]
-      },
-      {
-        abbr:"Th", day:"Thursday", sub:"VO2 Max HIIT", tag:"HIIT", tagClass:"hiit",
-        warmup:["Brisk walk → light jog","Leg swings","High knees 30s","Butt kicks 30s (8 min total)"],
-        workout:["[sub]Rotate weekly:","Option A — 6–8×(30s sprint + 90s walk)","Option B — 4 rounds 40s/20s: burpees, jump squats, mountain climbers, high knees","Option C — Tabata 8×(20s/10s) max effort · once per 10–14 days only"],
-        stretch:["5 min walk cool-down","Deep breathing reset","Hamstring stretch 60s","Quad stretch 45s"]
-      },
-      {
-        abbr:"Fr", day:"Friday", sub:"Full Body Circuit", tag:"Circuit", tagClass:"circuit",
+        workout:["Bulgarian split squats 4×6–8/leg","Single-leg RDL 3×8/leg","Nordic curl negatives 3×4–5","Cossack squats 3×6/side","[new]Wall sit calf raises 3×15","[new]Weeks 5–6 add: Dragon squats 3×5/leg with support"],
+        stretch:["Quad stretch 45s","Pigeon pose 60s","Hamstring stretch 60s","Hip flexor stretch 45s","Calf stretch 30s"] },
+      { abbr:"Th", day:"Thursday", sub:"VO2 Max HIIT", tag:"HIIT", tagClass:"hiit",
+        warmup:["Brisk walk → light jog","Leg swings","High knees 30s","Butt kicks 30s"],
+        workout:["[sub]Rotate weekly:","Option A — 6–8×(30s sprint + 90s walk)","Option B — 4 rounds 40s/20s: burpees, jump squats, mountain climbers, high knees","Option C — Tabata 8×(20s/10s) · use max once per 10–14 days"],
+        stretch:["5 min walk cool-down","Deep breathing reset","Hamstring stretch 60s","Quad stretch 45s"] },
+      { abbr:"Fr", day:"Friday", sub:"Full Body Circuit", tag:"Circuit", tagClass:"circuit",
         warmup:["Jumping jacks","Arm circles","Squats ×10","Push-ups ×8"],
         workout:["[sub]3 rounds:","Pull-ups ×5","Ring push-ups ×8","Jump squats ×10","Hollow body hold 25s","Ring rows ×8","Reverse lunges ×10/leg","Rest 90s between rounds"],
-        stretch:["Forward fold 60s","Cobra stretch 45s","Child's pose 60s","Figure-4 stretch 45s"]
-      },
-      {
-        abbr:"Sa", day:"Saturday", sub:"Skill Practice", tag:"Skill", tagClass:"skill",
+        stretch:["Forward fold 60s","Cobra 45s","Child's pose 60s","Figure-4 45s"] },
+      { abbr:"Sa", day:"Saturday", sub:"Skill Practice", tag:"Skill", tagClass:"skill",
         warmup:["Wrist prep 2 min","Shoulder rolls","Scapular pull-ups 2×8"],
         workout:["Kick-up to wall handstand 5–8 attempts","Wall handstand hold 3×20–30s","Tuck L-sit on rings 3×10–15s","Ring support hold 3×20s","Ring turn-out hold 2×10s"],
-        stretch:["Shoulder opener 60s","Deep squat hold 60s","Wrist stretch 60s"]
-      },
-      {
-        abbr:"Su", day:"Sunday", sub:"Zone 2 Cardio", tag:"Cardio", tagClass:"cardio",
+        stretch:["Shoulder opener 60s","Deep squat hold 60s","Wrist stretch 60s"] },
+      { abbr:"Su", day:"Sunday", sub:"Zone 2", tag:"Cardio", tagClass:"cardio",
         warmup:["—"],
         workout:["40–50 min brisk walk / light jog / cycle","Target HR 120–140 bpm","Optional: 5 min nasal-only breathing"],
-        stretch:["Hip flexor stretch 45s","Hamstring stretch 45s","Calf stretch 30s"]
-      }
+        stretch:["Hip flexor stretch 45s","Hamstring stretch 45s","Calf stretch 30s"] }
     ]
   },
-  3: {
-    name: "Phase 3",
-    title: "Advanced — Skill Mastery + Power",
-    dates: "7 Oct 2026 – 13 Jan 2027",
-    weeks: "14 weeks",
+  {
+    id: 3, tab: "Intermediate",
+    name: "Level 3 — Intermediate",
+    title: "Skill Mastery + Power",
+    desc: "Enter serious calisthenics skill training. Straight-arm work, muscle-up progressions, and handstand development begin.",
+    dates: "Weeks 15–28", weeks: "14 weeks",
     pyramidLevel: 3,
-    pyramidLabel: "Pyramid Level 3 → 4",
-    accent: "#8B6FE8",
-    accentDim: "rgba(139,111,232,0.12)",
-    accentMid: "rgba(139,111,232,0.25)",
-    note: "Dragon squats progressed to unassisted 3×6–8/leg (★). Jump rope warm-up extended to 3–4 min (★). Wall sit calf raises carried through as calf finisher (★). Straight-arm training (skin the cat, planche lean) introduced.",
+    accent: "#8B6FE8", accentDim: "rgba(139,111,232,0.12)", accentMid: "rgba(139,111,232,0.25)",
+    note: "Dragon squats progress to unassisted (★). Straight-arm training introduced — skin the cat, planche lean. Sprints and jumps return now that your base is solid.",
     days: [
-      {
-        abbr:"Mo", day:"Monday", sub:"Pull + Straight Arm", tag:"Pull", tagClass:"pull",
+      { abbr:"Mo", day:"Monday", sub:"Pull + Straight Arm", tag:"Pull", tagClass:"pull",
         warmup:["Skin the cat 2×3","Band pull-aparts ×15","Scapular pull-ups 2×10","Dead hang 45s"],
         workout:["Weighted pull-ups or Archer pull-ups 4×4–6","Muscle-up progressions 3×3–5","Skin the cat 3×3–5 reps","Hanging windshield wipers 3×6","Dragon flag negatives 3×3–4"],
-        stretch:["German hang 2×20s","Lat stretch 60s","Thoracic extension 60s","Shoulder dislocates ×10"]
-      },
-      {
-        abbr:"Tu", day:"Tuesday", sub:"Push + Planche", tag:"Push", tagClass:"push",
-        warmup:["Wrist prep 3 min","Planche lean 3×10s","Pike push-up ×10","Ring dip ×5 warm-up"],
+        stretch:["German hang 2×20s","Lat stretch 60s","Thoracic extension 60s","Shoulder dislocates ×10"] },
+      { abbr:"Tu", day:"Tuesday", sub:"Push + Planche", tag:"Push", tagClass:"push",
+        warmup:["Wrist prep 3 min","Planche lean 3×10s","Pike push-up ×10","Ring dip ×5"],
         workout:["HSPU progressions (pike/wall) 4×4–6","Weighted ring dips 3×6–8","Planche lean holds 4×10–15s","Archer push-ups 3×6/side","Band face pulls 3×15"],
-        stretch:["Wrist stretch 2 min","Chest opener 60s","Puppy pose 60s","Shoulder rotation 45s"]
-      },
-      {
-        abbr:"We", day:"Wednesday", sub:"Legs + Power", tag:"Legs", tagClass:"legs",
+        stretch:["Wrist stretch 2 min","Chest opener 60s","Puppy pose 60s","Shoulder rotation 45s"] },
+      { abbr:"We", day:"Wednesday", sub:"Legs + Power", tag:"Legs", tagClass:"legs",
         warmup:["[new]Jump rope 3–4 min","Leg swings","Ankle circles","Jump squats ×5","Cossack ×5/side"],
         workout:["Pistol squat progressions 4×4–6/leg","Nordic curls 3×5–6","[new]Dragon squats 3×6–8/leg unassisted","Vertical jumps 3×4 max height","[new]Wall sit calf raises 3×20","Sprints 4×40m"],
-        stretch:["Pigeon pose 60s","Hip flexor stretch 60s","Hamstring stretch 60s","Calf stretch 45s","Ankle circles 30s"]
-      },
-      {
-        abbr:"Th", day:"Thursday", sub:"VO2 Max Advanced", tag:"HIIT", tagClass:"hiit",
-        warmup:["10 min progressive jog + mobility","HR to 130+ before intervals begin"],
-        workout:["[sub]Rotate weekly:","8–10×(30s sprint + 60s walk)","OR 5 rounds Tabata complex — burpee + jump squat + mountain climber","OR 12-min run test — track distance to monitor VO2 max progress"],
-        stretch:["10 min walk cool-down","Deep breathing 3 min","Full lower body stretch 10 min"]
-      },
-      {
-        abbr:"Fr", day:"Friday", sub:"Full Body Power", tag:"Circuit", tagClass:"circuit",
+        stretch:["Pigeon pose 60s","Hip flexor stretch 60s","Hamstring stretch 60s","Calf stretch 45s","Ankle circles 30s"] },
+      { abbr:"Th", day:"Thursday", sub:"VO2 Max Advanced", tag:"HIIT", tagClass:"hiit",
+        warmup:["10 min progressive jog + mobility","HR to 130+ before intervals"],
+        workout:["[sub]Rotate weekly:","8–10×(30s sprint + 60s walk)","OR 5 rounds Tabata complex — burpee + jump squat + mountain climber","OR 12-min run test — track distance to monitor VO2 max"],
+        stretch:["10 min walk cool-down","Deep breathing 3 min","Full lower body stretch 10 min"] },
+      { abbr:"Fr", day:"Friday", sub:"Full Body Power", tag:"Circuit", tagClass:"circuit",
         warmup:["Arm circles","Jump squats ×8","Push-ups ×10","Pull-up ×3"],
         workout:["[sub]4 rounds:","Muscle-up attempt or pull-up ×4","HSPU progression ×4","Jump squats ×8","L-sit hold 15s","Ring rows ×8","Pistol squat attempt ×3/leg","Rest 90s"],
-        stretch:["Forward fold 60s","Pigeon pose 60s","Child's pose 60s","Hollow body breathing 60s"]
-      },
-      {
-        abbr:"Sa", day:"Saturday", sub:"Skill Mastery", tag:"Skill", tagClass:"skill",
+        stretch:["Forward fold 60s","Pigeon pose 60s","Child's pose 60s","Hollow body breathing 60s"] },
+      { abbr:"Sa", day:"Saturday", sub:"Skill Mastery", tag:"Skill", tagClass:"skill",
         warmup:["Wrist prep 3 min","Shoulder rotations","Scapular awareness drills"],
         workout:["Freestanding handstand kick-ups 10–15 attempts","Full L-sit on parallettes 3×10–20s","Front lever tuck hold 3×8–12s","Back lever progression 3×8–12s","Ring muscle-up drill 3×3"],
-        stretch:["German hang 30s","Wrist stretch 2 min","Shoulder opener 60s","Full spine mobility 5 min"]
-      },
-      {
-        abbr:"Su", day:"Sunday", sub:"Zone 2 + Mobility", tag:"Cardio", tagClass:"cardio",
+        stretch:["German hang 30s","Wrist stretch 2 min","Shoulder opener 60s","Full spine mobility 5 min"] },
+      { abbr:"Su", day:"Sunday", sub:"Zone 2 + Mobility", tag:"Cardio", tagClass:"cardio",
         warmup:["—"],
-        workout:["50–60 min run / cycle / row","Target HR 120–140 bpm","Full nasal breathing first 20 min","Optional: 10 min yoga or mobility flow at end"],
-        stretch:["Full body mobility flow 10 min","Focus: hips, thoracic, shoulders"]
-      }
+        workout:["50–60 min run / cycle / row","Target HR 120–140 bpm","Full nasal breathing first 20 min","Optional: 10 min yoga or mobility flow"],
+        stretch:["Full body mobility flow 10 min","Focus: hips, thoracic spine, shoulders"] }
+    ]
+  },
+  {
+    id: 4, tab: "Advanced",
+    name: "Level 4 — Advanced",
+    title: "Strength Skills + Human Flag",
+    desc: "Muscle-ups become reliable. Human flag, front/back lever, and freestanding handstand are the targets.",
+    dates: "Weeks 29–44", weeks: "16 weeks",
+    pyramidLevel: 4,
+    accent: "#E87A3D", accentDim: "rgba(232,122,61,0.12)", accentMid: "rgba(232,122,61,0.25)",
+    note: "Straight-arm training is now a primary focus. Introduce typewriter pull-ups and tuck planche. Human flag prep begins on Saturday. All pulling and pushing volume increases.",
+    days: [
+      { abbr:"Mo", day:"Monday", sub:"Pull + Muscle-up", tag:"Pull", tagClass:"pull",
+        warmup:["Skin the cat 2×4","Scapular pull-ups 2×10","Band pull-aparts ×15","Dead hang 45s"],
+        workout:["Muscle-ups 4×3–5 (strict focus)","Weighted pull-ups 3×5","Typewriter pull-ups 3×5","Hanging windshield wipers 3×8","Front lever tuck hold 4×10–15s"],
+        stretch:["German hang 2×25s","Lat stretch 60s","Thoracic rotation 60s","Shoulder dislocates ×12"] },
+      { abbr:"Tu", day:"Tuesday", sub:"Push + Handstand", tag:"Push", tagClass:"push",
+        warmup:["Wrist prep 3 min","Planche lean 3×15s","Wall HSPU ×5","Ring dip ×6"],
+        workout:["Wall HSPU 4×4–6","Weighted ring dips 3×8","Tuck planche hold 4×15–20s","Archer push-ups 3×8/side","Band face pulls 3×15"],
+        stretch:["Wrist stretch 2 min","Chest opener 60s","Puppy pose 60s","Shoulder internal rotation 45s"] },
+      { abbr:"We", day:"Wednesday", sub:"Legs + Explosive", tag:"Legs", tagClass:"legs",
+        warmup:["Jump rope 4 min","Leg swings","Box jump ×3","Cossack ×6/side"],
+        workout:["Pistol squats 4×5/leg","Nordic curls 3×8","Dragon squats 3×8/leg","Depth jumps 3×5","Wall sit calf raises 3×20","Sprint 4×60m"],
+        stretch:["Pigeon pose 60s","Hip flexor stretch 60s","Hamstring stretch 60s","Calf stretch 45s"] },
+      { abbr:"Th", day:"Thursday", sub:"VO2 Max", tag:"HIIT", tagClass:"hiit",
+        warmup:["10 min progressive jog","Dynamic mobility circuit"],
+        workout:["[sub]Rotate weekly:","10×(30s max effort sprint + 60s walk)","OR 20 min tempo run at 80% max HR","OR Jump rope complex — 3×(3 min continuous + 1 min rest)"],
+        stretch:["10 min walk cool-down","Deep breathing 3 min","Full lower body stretch"] },
+      { abbr:"Fr", day:"Friday", sub:"Skill Circuit", tag:"Circuit", tagClass:"circuit",
+        warmup:["Arm circles","Jump squats ×8","Muscle-up attempt ×2","Pull-up ×5"],
+        workout:["[sub]4 rounds:","Muscle-up ×3","Wall HSPU ×4","Pistol squat ×5/leg","Front lever hold 10s","L-sit hold 20s","Tuck planche 15s","Rest 90s"],
+        stretch:["Forward fold 60s","Pigeon pose 60s","Child's pose 60s","Spine rotation 45s"] },
+      { abbr:"Sa", day:"Saturday", sub:"Static Skills", tag:"Skill", tagClass:"skill",
+        warmup:["Wrist prep 3 min","Shoulder rotations","Scapular pull-ups 2×10"],
+        workout:["Freestanding handstand 15–30s attempts","Back lever hold 4×8–12s","Human flag progressions (side plank on bar) 3×15–20s","L-sit to V-sit progressions 3×10s","Ring muscle-ups 3×3"],
+        stretch:["German hang 30s","Full spine mobility 5 min","Wrist stretch 2 min","Hip opener sequence 5 min"] },
+      { abbr:"Su", day:"Sunday", sub:"Zone 2", tag:"Cardio", tagClass:"cardio",
+        warmup:["—"],
+        workout:["60 min run / cycle / row","Target HR 120–140 bpm","Nasal breathing first 20 min","Optional: 10 min yoga flow"],
+        stretch:["Full body mobility flow 12 min","Focus: shoulders, hips, thoracic"] }
+    ]
+  },
+  {
+    id: 5, tab: "Expert",
+    name: "Level 5 — Expert",
+    title: "One-Arm, Planche + Front Lever",
+    desc: "One-arm pull-up progressions, full planche development, and human flag held cleanly. Elite conditioning.",
+    dates: "Weeks 45–64", weeks: "20 weeks",
+    pyramidLevel: 5,
+    accent: "#D4428A", accentDim: "rgba(212,66,138,0.12)", accentMid: "rgba(212,66,138,0.25)",
+    note: "One-arm pull-up negatives introduced Monday. Advanced tuck planche replaces tuck hold. Front lever pulls begin. VO2 max maintained with lactate threshold work.",
+    days: [
+      { abbr:"Mo", day:"Monday", sub:"Pull + One-Arm Prep", tag:"Pull", tagClass:"pull",
+        warmup:["Skin the cat 3×4","One-arm hang 10s/arm","Scapular pull-ups 2×10","Dead hang 60s"],
+        workout:["One-arm pull-up negatives 3×3–5/arm","Archer pull-ups 4×5/side","Ring muscle-ups 3×3–5","Front lever pulls 3×3–5","Hollow rocks 3×12"],
+        stretch:["German hang 2×30s","Lat stretch 60s","Thoracic rotation 60s","Shoulder dislocates ×15"] },
+      { abbr:"Tu", day:"Tuesday", sub:"Push + Planche", tag:"Push", tagClass:"push",
+        warmup:["Wrist prep 4 min","Advanced tuck planche 3×15s","Freestanding HSPU attempt ×3","Ring dip ×8"],
+        workout:["Freestanding HSPU 4×3–5","Advanced tuck planche hold 4×15–20s","Deep ring dips 3×8–10","90-degree push-up progressions 3×3","Planche lean to lift attempts"],
+        stretch:["Wrist stretch 3 min","Chest opener 60s","Puppy pose 75s","Shoulder rotation 60s"] },
+      { abbr:"We", day:"Wednesday", sub:"Legs + Power", tag:"Power", tagClass:"power",
+        warmup:["Jump rope 4–5 min","Leg swings","Depth jump ×3","Dragon squat ×5/leg"],
+        workout:["Weighted pistol squats 4×5/leg","Nordic curls 3×8–10","Dragon squats 3×8/leg","Depth jumps to box 3×5","Wall sit calf raises weighted 3×20","Sprint 6×60m"],
+        stretch:["Pigeon pose 75s","Hip flexor stretch 60s","Hamstring stretch 60s","Calf stretch 45s","Ankle mobility 30s"] },
+      { abbr:"Th", day:"Thursday", sub:"VO2 Max — Threshold", tag:"HIIT", tagClass:"hiit",
+        warmup:["12 min progressive jog","Dynamic full-body circuit","HR to 140+ before work sets"],
+        workout:["[sub]Rotate weekly:","Lactate threshold run — 20–25 min at 85% max HR","OR 12-min run test — record distance","OR Advanced jump rope intervals — 5×(2 min complex + 90s rest)"],
+        stretch:["10 min walk cool-down","Deep breathing 4 min","Full lower body stretch 10 min"] },
+      { abbr:"Fr", day:"Friday", sub:"Skill Circuit", tag:"Circuit", tagClass:"circuit",
+        warmup:["Arm circles","Jump squats ×10","Ring muscle-up ×2","Freestanding HSPU ×2"],
+        workout:["[sub]5 rounds:","Ring muscle-up ×2","Freestanding HSPU ×3","Weighted pistol squat ×4/leg","Front lever hold 8s","One-arm hang 5s/arm","Rest 90s"],
+        stretch:["Forward fold 60s","Pigeon pose 75s","Child's pose 60s","Hollow body breathing 60s"] },
+      { abbr:"Sa", day:"Saturday", sub:"Elite Skills", tag:"Elite", tagClass:"elite",
+        warmup:["Wrist prep 4 min","Shoulder rotations","Skin the cat 3×4"],
+        workout:["Human flag 4×8–12s","One-arm pull-up assisted 3×3–5/arm","Tuck to advanced tuck planche 3×15s","V-sit hold progressions 3×10–15s","Press handstand attempts 5–8 reps"],
+        stretch:["German hang 35s","Full spine mobility 6 min","Wrist stretch 2 min","Hip opener 5 min"] },
+      { abbr:"Su", day:"Sunday", sub:"Zone 2 + Mobility", tag:"Cardio", tagClass:"cardio",
+        warmup:["—"],
+        workout:["60–75 min run / cycle / row","Target HR 120–140 bpm","Nasal breathing first 25 min","Optional: 15 min yoga or flow work"],
+        stretch:["Comprehensive mobility 15 min","Shoulders · hips · thoracic · ankles — all zones"] }
+    ]
+  },
+  {
+    id: 6, tab: "Elite",
+    name: "Level 6 — Elite",
+    title: "Full Planche, One-Arm + Freestyle",
+    desc: "The summit. One-arm pull-ups, full planche push-ups, press to handstand, and freestyle combinations most can't imagine.",
+    dates: "Week 65+", weeks: "Ongoing mastery",
+    pyramidLevel: 6,
+    accent: "#C9A227", accentDim: "rgba(201,162,39,0.12)", accentMid: "rgba(201,162,39,0.3)",
+    note: "No reps targets — at this level, quality and range of expression matter more than numbers. Skills are combined into flows. New skills (maltese, Victorian, planche push-ups) are explored.",
+    days: [
+      { abbr:"Mo", day:"Monday", sub:"One-Arm + Advanced Pull", tag:"Pull", tagClass:"pull",
+        warmup:["One-arm hang 15s/arm","Skin the cat 3×5","Scapular pull-ups 2×10","Dead hang 60s"],
+        workout:["One-arm pull-ups 3×2–4/arm","Front lever pull-ups 3×3–5","Front lever raises 3×5","Ring muscle-up combinations 3×3","Advanced back lever variants 3×10s"],
+        stretch:["German hang 2×35s","Lat stretch 75s","Full shoulder mobility sequence 8 min"] },
+      { abbr:"Tu", day:"Tuesday", sub:"Planche + Free HSPU", tag:"Push", tagClass:"push",
+        warmup:["Wrist prep 5 min","Planche attempts 3×8s","Free HSPU ×4","Ring dip ×8"],
+        workout:["Tuck/advanced tuck planche push-ups 3×3–5","Freestanding HSPU 4×5","Press to handstand 3×3–5 attempts","90-degree push-ups 3×3","Planche to handstand transition work"],
+        stretch:["Wrist stretch 3 min","Chest opener 75s","Puppy pose 75s","Thoracic extension 60s"] },
+      { abbr:"We", day:"Wednesday", sub:"Plyometric + Legs", tag:"Power", tagClass:"power",
+        warmup:["Jump rope 5 min — double unders","Leg swings","Depth jump ×4","Dragon squat ×6/leg"],
+        workout:["Weighted pistol squats 4×5/leg","Nordic curls 3×10","Depth jumps to max box 3×5","Wall sit calf raises loaded 3×20","Sprint complex 6×60m","Dragon squat flow — 2 min continuous"],
+        stretch:["Pigeon pose 75s","Hip flexor stretch 75s","Hamstring stretch 60s","Full lower body flow 8 min"] },
+      { abbr:"Th", day:"Thursday", sub:"Conditioning", tag:"HIIT", tagClass:"hiit",
+        warmup:["15 min progressive run","Full dynamic circuit"],
+        workout:["[sub]Rotate weekly:","Race-pace intervals — 6×400m at 5K effort","OR Advanced jump rope skills — crossovers, double unders, speed work","OR Sport-specific conditioning of your choice"],
+        stretch:["15 min full body cool-down","Deep nasal breathing 5 min"] },
+      { abbr:"Fr", day:"Friday", sub:"Freestyle Flow", tag:"Elite", tagClass:"elite",
+        warmup:["Light movement warm-up 10 min","Skill-specific prep"],
+        workout:["[sub]Open skill session — combine and explore:","Muscle-up into L-sit into handstand flows","Planche to front lever transitions","One-arm hang to ring work combinations","New skill exploration — no fixed structure","Focus on expression, control, and creativity"],
+        stretch:["Full body mobility flow 15 min","Breathwork 5 min"] },
+      { abbr:"Sa", day:"Saturday", sub:"Static Holds + Combos", tag:"Elite", tagClass:"elite",
+        warmup:["Wrist prep 5 min","Shoulder complex","Skin the cat 3×5"],
+        workout:["Full planche hold or progressions 4×8–12s","Human flag 4×10s+","Maltese progressions 3×8s","Victorian progressions (advanced back lever) 3×8s","Ring skill combinations — freestyle sequences"],
+        stretch:["German hang 40s","Full spine mobility 8 min","Wrist + shoulder decompression 5 min"] },
+      { abbr:"Su", day:"Sunday", sub:"Active Recovery", tag:"Cardio", tagClass:"cardio",
+        warmup:["—"],
+        workout:["60–75 min easy movement — run / walk / swim / cycle","Conversational pace only","Optional: 20 min yoga or dedicated mobility work"],
+        stretch:["Comprehensive mobility 20 min","Full body — all joints, all planes","Breathwork and meditation 5 min"] }
     ]
   }
-};
-
-let currentPhase = 1;
+];
 
 function buildItem(text) {
   const isNew = text.startsWith("[new]");
   const isSub = text.startsWith("[sub]");
   const clean = text.replace(/^\[new\]|\[sub\]/,"");
-  const cls = isNew ? " class='new-item'" : isSub ? " class='sub-header'" : "";
+  const cls = isNew ? " class='new-item'" : isSub ? " class='sub-item'" : "";
   return `<li${cls}>${clean}</li>`;
 }
 
-function buildPhasePanel(id, phase) {
-  const days = phase.days.map((d,i) => `
-    <div class="day-card" id="p${id}-day-${i}">
-      <div class="day-header" onclick="toggleDay('p${id}-day-${i}')">
+function buildPanel(p) {
+  const segs = [1,2,3,4,5,6].map(n => {
+    const lit = n <= p.pyramidLevel;
+    return `<div class="pyramid-seg ${lit?'lit':'dim'}" style="${lit?`background:${p.accent};height:${6+n*2}px`:`height:${6+n*2}px`}"></div>`;
+  }).join("");
+
+  const days = p.days.map((d,i) => `
+    <div class="day-card" id="p${p.id}-d${i}">
+      <div class="day-header" onclick="toggle('p${p.id}-d${i}')">
         <div class="day-dot">${d.abbr}</div>
         <div class="day-info">
           <div class="day-name">${d.day}</div>
@@ -599,9 +525,7 @@ function buildPhasePanel(id, phase) {
         </div>
         <div class="day-right">
           <span class="focus-tag tag-${d.tagClass}">${d.tag}</span>
-          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
       </div>
       <div class="day-body">
@@ -620,85 +544,66 @@ function buildPhasePanel(id, phase) {
           </div>
         </div>
       </div>
-    </div>
-  `).join("");
-
-  const segs = [1,2,3,4,5,6].map(n =>
-    `<div class="pyramid-seg ${n <= phase.pyramidLevel ? 'lit' : ''}"></div>`
-  ).join("");
+    </div>`).join("");
 
   return `
-    <div class="phase-panel" id="panel-${id}">
-      <div class="hero">
-        <div class="phase-eyebrow">${phase.name}</div>
-        <h1>${phase.title}</h1>
-        <div class="hero-meta">
-          <span class="meta-pill">${phase.dates}</span>
-          <span class="meta-pill">${phase.weeks}</span>
-          <span class="meta-pill">${phase.pyramidLabel}</span>
-        </div>
+  <div class="phase-panel" id="panel-${p.id}">
+    <div class="hero">
+      <div class="phase-eyebrow">${p.name}</div>
+      <h1>${p.title}</h1>
+      <p style="font-size:13px;color:var(--muted2);margin-bottom:16px;max-width:520px;line-height:1.6">${p.desc}</p>
+      <div class="hero-meta">
+        <span class="meta-pill">${p.dates}</span>
+        <span class="meta-pill">${p.weeks}</span>
+        <span class="meta-pill">Pyramid Level ${p.pyramidLevel} of 6</span>
+      </div>
+      <div class="pyramid-wrap">
         <div class="pyramid-bar">${segs}</div>
-        <div class="pyramid-label">Calisthenics pyramid progress — <span>Level ${phase.pyramidLevel} of 6</span></div>
+        <div class="pyramid-label">Journey progress — <span>Level ${p.pyramidLevel}</span> of 6</div>
       </div>
-      <div class="update-note">
-        <strong>What changed in this phase</strong>${phase.note}
-      </div>
-      <div class="days-container">${days}</div>
     </div>
-  `;
+    <div class="update-note"><strong>Phase notes</strong>${p.note}</div>
+    <div class="days-container">${days}</div>
+  </div>`;
 }
 
-function render() {
-  document.getElementById("app").innerHTML =
-    Object.entries(PHASES).map(([id, phase]) => buildPhasePanel(id, phase)).join("");
-  document.getElementById("panel-1").classList.add("active");
-}
-
-function setAccent(phase) {
-  const p = PHASES[phase];
+function setAccent(p) {
   const r = document.documentElement.style;
   r.setProperty("--accent", p.accent);
   r.setProperty("--accent-dim", p.accentDim);
   r.setProperty("--accent-mid", p.accentMid);
 }
 
-function switchPhase(num) {
-  // Close all open cards in previous phase
+function switchPhase(id) {
   document.querySelectorAll(".day-card.open").forEach(c => c.classList.remove("open"));
-
-  // Hide all panels
   document.querySelectorAll(".phase-panel").forEach(p => p.classList.remove("active"));
-
-  // Show selected panel
-  const panel = document.getElementById(`panel-${num}`);
-  panel.classList.add("active");
-
-  // Update tabs
-  document.querySelectorAll(".phase-tab").forEach((t, i) => {
-    t.classList.toggle("active", i + 1 === num);
-  });
-
-  // Update accent colors
-  setAccent(num);
-
-  currentPhase = num;
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  document.querySelectorAll(".phase-tab").forEach((t,i) => t.classList.toggle("active", PHASES[i].id === id));
+  document.getElementById(`panel-${id}`).classList.add("active");
+  setAccent(PHASES.find(p => p.id === id));
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function toggleDay(id) {
+function toggle(id) {
   const card = document.getElementById(id);
-  const isOpen = card.classList.contains("open");
-
-  // Close all cards in same phase
+  const wasOpen = card.classList.contains("open");
   card.closest(".days-container").querySelectorAll(".day-card").forEach(c => c.classList.remove("open"));
-
-  // Toggle clicked card
-  if (!isOpen) card.classList.add("open");
+  if (!wasOpen) card.classList.add("open");
 }
 
-// Init
-render();
-setAccent(1);
+// Build tabs
+const tabsEl = document.getElementById("tabs");
+PHASES.forEach(p => {
+  const btn = document.createElement("button");
+  btn.className = "phase-tab" + (p.id === 1 ? " active" : "");
+  btn.textContent = p.tab;
+  btn.onclick = () => switchPhase(p.id);
+  tabsEl.appendChild(btn);
+});
+
+// Build panels
+document.getElementById("app").innerHTML = PHASES.map(buildPanel).join("");
+document.getElementById("panel-1").classList.add("active");
+setAccent(PHASES[0]);
 </script>
 </body>
 </html>
