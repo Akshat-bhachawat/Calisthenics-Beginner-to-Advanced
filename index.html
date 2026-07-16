@@ -229,6 +229,54 @@ nav {
 .phase-panel.active { display: block; animation: fadeUp 0.28s cubic-bezier(0.4,0,0.2,1) both; }
 @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 
+/* ── RULES BANNER ── */
+.rules-banner { max-width: 860px; margin: 0 auto; padding: 18px 20px 0; }
+.rules-banner-inner {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 13px 18px;
+}
+.rules-title {
+  font-family: var(--font-display); font-weight: 600; font-size: 11px;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted2);
+  display: flex; align-items: center; justify-content: space-between; gap: 6px; cursor: pointer;
+  user-select: none;
+}
+.rules-title .chev { width: 13px; height: 13px; color: var(--muted); transition: transform var(--t); flex-shrink: 0; }
+.rules-title.open .chev { transform: rotate(180deg); }
+.rules-list { list-style: none; font-size: 12px; color: var(--muted2); line-height: 1.8; max-height: 0; overflow: hidden; transition: max-height var(--t); }
+.rules-list.open { max-height: 400px; margin-top: 10px; }
+.rules-list li { padding-left: 15px; position: relative; }
+.rules-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+
+/* ── EXIT CHECKLIST ── */
+.checklist-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 20px; margin: 0 auto 20px; max-width: 860px;
+}
+.checklist-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+.checklist-title { font-family: var(--font-display); font-weight: 600; font-size: 13px; color: var(--text); }
+.checklist-progress { font-size: 11px; color: var(--muted); font-family: var(--font-display); font-weight: 500; }
+.checklist-progress.ready { color: #5DD68A; font-weight: 700; }
+.checklist-items { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 4px; }
+.checklist-items li {
+  display: flex; align-items: flex-start; gap: 10px; font-size: 12.5px;
+  color: var(--muted2); cursor: pointer; line-height: 1.5; user-select: none;
+}
+.check-box {
+  width: 17px; height: 17px; border-radius: 5px; flex-shrink: 0; margin-top: 1px;
+  border: 1px solid var(--border-strong); transition: all var(--t);
+  display: flex; align-items: center; justify-content: center;
+}
+.checklist-items li.checked .check-box { background: var(--accent); border-color: var(--accent); }
+.checklist-items li.checked { color: var(--text); text-decoration: line-through; text-decoration-color: var(--muted); }
+.check-box svg { width: 10px; height: 10px; opacity: 0; color: #fff; }
+.checklist-items li.checked .check-box svg { opacity: 1; }
+.deload-note {
+  margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+  font-size: 11px; color: #D4AA48; line-height: 1.6;
+}
+.mastery-note { font-size: 12.5px; color: var(--muted2); line-height: 1.6; margin-top: 4px; }
+
 /* ── FOOTER ── */
 footer {
   border-top: 1px solid var(--border);
@@ -249,6 +297,22 @@ footer strong { color: var(--muted2); }
   <div class="phase-tabs" id="tabs"></div>
 </nav>
 
+<div class="rules-banner">
+  <div class="rules-banner-inner">
+    <div class="rules-title" id="rulesTitle" onclick="toggleRules()">
+      Progression &amp; Deload Rules
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <ul class="rules-list" id="rulesList">
+      <li>Phases are milestones, not deadlines — advance only when the exit checklist for your current phase is cleared, never just because a week count passed.</li>
+      <li>Increase reps before increasing difficulty. Only move a movement to its next progression once every set hits the top of its rep range, with clean form, for two consecutive sessions.</li>
+      <li>If form breaks down on any set, regress one step rather than pushing through with bad reps.</li>
+      <li>Every 4th week of a phase is a deload week: cut volume to roughly 60%, skip max-effort attempts and HIIT, keep everything else at normal intensity.</li>
+      <li>Don't advance phases while carrying persistent joint pain, poor sleep, or lingering soreness from the week before — resolve that first, even if the checklist is otherwise done.</li>
+    </ul>
+  </div>
+</div>
+
 <div id="app"></div>
 
 <footer>
@@ -264,10 +328,20 @@ const PHASES = [
     name: "Level 1 — Beginner",
     title: "Foundation",
     desc: "Build basic pulling, pushing, and movement patterns from scratch. Master form before volume.",
-    dates: "Weeks 1–6", weeks: "6 weeks",
+    dates: "Weeks 1–6 typical", weeks: "6–12 weeks · gated by checklist",
     pyramidLevel: 1,
     accent: "#3D8EDE", accentDim: "rgba(61,142,222,0.12)", accentMid: "rgba(61,142,222,0.25)",
     note: "Wednesday: wall sit + calf raises merged into wall sit calf raises (★). Jump rope added to leg-day warm-up (★). These replace, not add to, existing exercises.",
+    checklist: [
+      "5 band-assisted (or unassisted) pull-ups, 3 sets, full range",
+      "12 clean incline or floor push-ups, 3 sets",
+      "Ring support hold — 30 seconds",
+      "Hollow / plank hold — 30–40 seconds",
+      "Dead hang — 45 seconds",
+      "Wall sit calf raises 3×15–20 pain-free",
+      "Completed every workout for at least 4 consecutive weeks",
+      "No shoulder, elbow, or wrist pain"
+    ],
     days: [
       { abbr:"Mo", day:"Monday", sub:"Pull + Core", tag:"Pull", tagClass:"pull",
         warmup:["Arm circles","Scapular pull-ups 2×8","Cat-cow ×10","Dead hang 20s"],
@@ -304,10 +378,18 @@ const PHASES = [
     name: "Level 2 — Novice",
     title: "Intermediate + VO2 Max",
     desc: "Graduate to unassisted pulling, ring work, and introduce HIIT to build cardiovascular capacity.",
-    dates: "Weeks 7–14", weeks: "8 weeks",
+    dates: "Begins after Phase 1 checklist", weeks: "2–4 months · gated by checklist",
     pyramidLevel: 2,
     accent: "#4DBB7A", accentDim: "rgba(77,187,122,0.12)", accentMid: "rgba(77,187,122,0.25)",
-    note: "Jump rope added to Wednesday warm-up (★). Dragon squats introduced weeks 5–6 of this phase (★). Thursday HIIT is new — rotate options weekly.",
+    note: "Jump rope added to Wednesday warm-up (★). Dragon squats introduced weeks 5–6 of this phase (★). Thursday HIIT is new — rotate options weekly. Ring dips: if full reps aren't clean yet, stay on ring support hold → negatives → band-assisted before loading straight sets — don't force the 3×5–8 on week one.",
+    checklist: [
+      "5 strict unassisted pull-ups, 2 sets",
+      "5 full ring dips, pain-free (not just support hold)",
+      "Dragon squat with support, 3×5/leg, controlled",
+      "12-min run test improved over Phase 1 baseline",
+      "Hollow hold — 45 seconds",
+      "No overuse pain in elbows or wrists after ring work"
+    ],
     days: [
       { abbr:"Mo", day:"Monday", sub:"Pull + Core", tag:"Pull", tagClass:"pull",
         warmup:["Arm circles","Scapular pull-ups 2×8","Band pull-aparts ×12","Dead hang 30s"],
@@ -344,10 +426,18 @@ const PHASES = [
     name: "Level 3 — Intermediate",
     title: "Skill Mastery + Power",
     desc: "Enter serious calisthenics skill training. Straight-arm work, muscle-up progressions, and handstand development begin.",
-    dates: "Weeks 15–28", weeks: "14 weeks",
+    dates: "Begins after Phase 2 checklist", weeks: "4–8 months · gated by checklist",
     pyramidLevel: 3,
     accent: "#8B6FE8", accentDim: "rgba(139,111,232,0.12)", accentMid: "rgba(139,111,232,0.25)",
-    note: "Dragon squats progress to unassisted (★). Straight-arm training introduced — skin the cat, planche lean. Sprints and jumps return now that your base is solid.",
+    note: "Dragon squats progress to unassisted (★). Straight-arm training introduced — skin the cat, planche lean. Sprints and jumps return now that your base is solid. Muscle-up progressions only start once you have 8 strict pull-ups and 8 ring dips — until then, keep building pull/dip volume instead.",
+    checklist: [
+      "8 strict pull-ups, full range",
+      "8 full ring dips",
+      "Explosive chest-to-bar pull-up ×3 (muscle-up transition strength)",
+      "Front lever tuck hold — 12 seconds",
+      "Unassisted dragon squats 3×8/leg",
+      "Freestanding handstand kick-up with 3+ second control"
+    ],
     days: [
       { abbr:"Mo", day:"Monday", sub:"Pull + Straight Arm", tag:"Pull", tagClass:"pull",
         warmup:["Skin the cat 2×3","Band pull-aparts ×15","Scapular pull-ups 2×10","Dead hang 45s"],
@@ -384,10 +474,17 @@ const PHASES = [
     name: "Level 4 — Advanced",
     title: "Strength Skills + Human Flag",
     desc: "Muscle-ups become reliable. Human flag, front/back lever, and freestanding handstand are the targets.",
-    dates: "Weeks 29–44", weeks: "16 weeks",
+    dates: "Begins after Phase 3 checklist", weeks: "8–18 months · gated by checklist",
     pyramidLevel: 4,
     accent: "#E87A3D", accentDim: "rgba(232,122,61,0.12)", accentMid: "rgba(232,122,61,0.25)",
-    note: "Straight-arm training is now a primary focus. Introduce typewriter pull-ups and tuck planche. Human flag prep begins on Saturday. All pulling and pushing volume increases.",
+    note: "Straight-arm training is now a primary focus. Introduce typewriter pull-ups and tuck planche. Human flag prep begins on Saturday. All pulling and pushing volume increases. Monday's 'Muscle-ups 4×3–5' assumes you're already stringing reps — if not, keep it as transition-drill volume (negatives, false grip work) until it clicks; most people need well over a year of dedicated training to get here, and that's normal.",
+    checklist: [
+      "2–3 clean strict muscle-ups (or continued transition drills if not yet there)",
+      "Tuck planche hold — 20 seconds",
+      "Back lever hold — 12 seconds",
+      "Tucked human flag hold — 15 seconds",
+      "Pistol squats 5/leg, clean"
+    ],
     days: [
       { abbr:"Mo", day:"Monday", sub:"Pull + Muscle-up", tag:"Pull", tagClass:"pull",
         warmup:["Skin the cat 2×4","Scapular pull-ups 2×10","Band pull-aparts ×15","Dead hang 45s"],
@@ -424,10 +521,17 @@ const PHASES = [
     name: "Level 5 — Expert",
     title: "One-Arm, Planche + Front Lever",
     desc: "One-arm pull-up progressions, full planche development, and human flag held cleanly. Elite conditioning.",
-    dates: "Weeks 45–64", weeks: "20 weeks",
+    dates: "Begins after Phase 4 checklist", weeks: "1–3 years · gated by checklist",
     pyramidLevel: 5,
     accent: "#D4428A", accentDim: "rgba(212,66,138,0.12)", accentMid: "rgba(212,66,138,0.25)",
-    note: "One-arm pull-up negatives introduced Monday. Advanced tuck planche replaces tuck hold. Front lever pulls begin. VO2 max maintained with lactate threshold work.",
+    note: "One-arm pull-up negatives introduced Monday — only begin these once you have 15 strict pull-ups and a weighted pull-up at +25% bodyweight; otherwise keep building weighted pull-up volume instead. Advanced tuck planche replaces tuck hold. Front lever pulls begin. VO2 max maintained with lactate threshold work. Full planche and one-arm pull-ups genuinely take most people 1–3+ years from here — that's the realistic range, not a sign something's wrong.",
+    checklist: [
+      "15+ strict pull-ups",
+      "Weighted pull-up at +25% bodyweight OR a controlled 5-second one-arm negative",
+      "Advanced tuck planche hold — 20+ seconds",
+      "Front lever pulls — 5 clean reps",
+      "Full-extension human flag hold — 10+ seconds"
+    ],
     days: [
       { abbr:"Mo", day:"Monday", sub:"Pull + One-Arm Prep", tag:"Pull", tagClass:"pull",
         warmup:["Skin the cat 3×4","One-arm hang 10s/arm","Scapular pull-ups 2×10","Dead hang 60s"],
@@ -464,10 +568,11 @@ const PHASES = [
     name: "Level 6 — Elite",
     title: "Full Planche, One-Arm + Freestyle",
     desc: "The summit. One-arm pull-ups, full planche push-ups, press to handstand, and freestyle combinations most can't imagine.",
-    dates: "Week 65+", weeks: "Ongoing mastery",
+    dates: "Begins after Phase 5 checklist", weeks: "Long-term mastery (3–7+ years)",
     pyramidLevel: 6,
     accent: "#C9A227", accentDim: "rgba(201,162,39,0.12)", accentMid: "rgba(201,162,39,0.3)",
-    note: "No reps targets — at this level, quality and range of expression matter more than numbers. Skills are combined into flows. New skills (maltese, Victorian, planche push-ups) are explored.",
+    note: "No reps targets — at this level, quality and range of expression matter more than numbers. Skills are combined into flows. New skills (maltese, Victorian, planche push-ups) are explored. There's no fixed exit here — this is open-ended mastery work, not a level with a guaranteed finish line.",
+    masteryNote: "This phase has no exit checklist — progress here is measured in years, not weeks. Keep deloading proactively, prioritize joint health over new PRs, and let new skills (maltese, Victorian, planche push-ups) emerge at their own pace rather than on a schedule.",
     days: [
       { abbr:"Mo", day:"Monday", sub:"One-Arm + Advanced Pull", tag:"Pull", tagClass:"pull",
         warmup:["One-arm hang 15s/arm","Skin the cat 3×5","Scapular pull-ups 2×10","Dead hang 60s"],
@@ -507,6 +612,47 @@ function buildItem(text) {
   const clean = text.replace(/^\[new\]|\[sub\]/,"");
   const cls = isNew ? " class='new-item'" : isSub ? " class='sub-item'" : "";
   return `<li${cls}>${clean}</li>`;
+}
+
+function buildChecklist(p) {
+  if (!p.checklist) {
+    return `<div class="checklist-card">
+      <div class="checklist-title">Open-Ended Phase</div>
+      <p class="mastery-note">${p.masteryNote}</p>
+    </div>`;
+  }
+  const items = p.checklist.map((c, i) => {
+    const id = `p${p.id}-c${i}`;
+    return `<li id="${id}" onclick="toggleCheck('${id}',${p.id})">
+      <span class="check-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+      ${c}
+    </li>`;
+  }).join("");
+  return `
+  <div class="checklist-card">
+    <div class="checklist-header">
+      <div class="checklist-title">Phase Exit Checklist — clear all before moving on</div>
+      <div class="checklist-progress" id="progress-${p.id}">0 / ${p.checklist.length} complete</div>
+    </div>
+    <ul class="checklist-items">${items}</ul>
+    <div class="deload-note">Deload reminder: every 4th week in this phase, drop volume to ~60%, skip max-effort attempts and HIIT, keep form crisp.</div>
+  </div>`;
+}
+
+function toggleCheck(id, phaseId) {
+  const el = document.getElementById(id);
+  el.classList.toggle('checked');
+  const card = el.closest('.checklist-card');
+  const all = card.querySelectorAll('.checklist-items li');
+  const done = card.querySelectorAll('.checklist-items li.checked').length;
+  const progressEl = document.getElementById(`progress-${phaseId}`);
+  progressEl.textContent = `${done} / ${all.length} complete`;
+  progressEl.classList.toggle('ready', done === all.length);
+}
+
+function toggleRules() {
+  document.getElementById('rulesList').classList.toggle('open');
+  document.getElementById('rulesTitle').classList.toggle('open');
 }
 
 function buildPanel(p) {
@@ -563,6 +709,7 @@ function buildPanel(p) {
       </div>
     </div>
     <div class="update-note"><strong>Phase notes</strong>${p.note}</div>
+    ${buildChecklist(p)}
     <div class="days-container">${days}</div>
   </div>`;
 }
